@@ -48,3 +48,18 @@ defined alongside this skeleton.
 
 If code contradicts the architecture,  
 **the code is wrong**.
+
+---
+
+## Why a Skeleton Exists
+
+This skeleton exists to show that:
+
+- the architecture is implementable without interpretation
+- code structure follows documents, not intuition
+- implementation is a mechanical translation of design
+
+If the skeleton ever needs to change
+without a corresponding change in the architecture documents,
+the change is incorrect.
+ 
