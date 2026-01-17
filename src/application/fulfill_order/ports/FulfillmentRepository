@@ -1,0 +1,68 @@
+# FulfillmentRepository
+
+This port defines the **persistence boundary**
+required by the FulfillOrder use case.
+
+It represents the only way the application layer
+can access and persist fulfillment state.
+
+No storage technology is assumed.
+
+---
+
+## Responsibility
+
+The FulfillmentRepository is responsible for:
+
+- loading the current fulfillment state for a given order
+- persisting fulfillment state transitions
+- enforcing idempotency at the persistence boundary
+
+It guarantees **consistency of state**, not delivery semantics.
+
+---
+
+## Required Capabilities
+
+Conceptually, the repository must support:
+
+- retrieving fulfillment by order identifier
+- persisting a fulfillment state transition
+- preventing duplicate fulfillment effects
+
+The exact implementation is left to infrastructure adapters.
+
+---
+
+## Idempotency Contract
+
+The repository **must be safe under repeated writes**.
+
+Persisting the same fulfillment state more than once
+must not result in duplicated or corrupted data.
+
+This guarantee is mandatory.
+
+---
+
+## Explicit Non-Responsibilities
+
+This port does NOT define:
+
+- database schema
+- transaction management
+- retry behavior
+- locking strategy
+- performance characteristics
+
+Those concerns belong to infrastructure.
+
+---
+
+## Design Constraint
+
+If the storage technology changes,
+this contract must remain valid without modification.
+
+Any implementation that violates this contract
+is considered incorrect.
